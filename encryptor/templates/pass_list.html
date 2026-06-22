@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password List | GENRYPTOR</title>
+    <link rel="stylesheet" href="{% static 'pass-list.css' %}">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <a class="link" href="{% url 'encryptor' %}">Encrypt</a>
+            <h1>GENRYPTOR</h1>
+            <a class="link" href="{% url 'decryptor' %}">Decrypt</a>
+
+        </div>
+
+    <a class="link refresh" href="{% url 'pass-list' %}">Refresh</a>
+
+    <form action="" method="post" class="filter-form">
+        {% csrf_token %}
+        <input type="text" placeholder="Filter by name" id="filter" name="filter" class="filter">
+    </form>
+        
+    <div class="flex-wrap">
+        {% for passwd in passwds %}
+            <div class="bar">
+                <p class="p0">{{passwd.account}}</p>
+                <a class="link-2 p2" href="{% url 'decryptor-id' passwd.id %}">Decrypt</a>
+             
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
